@@ -7,8 +7,13 @@ function saveToLocalStorage(event)
     var email = event.target.email.value;
     var phoneNumber = event.target.phonenumber.value;
 
-    localStorage.setItem("name",name);
-    localStorage.setItem("email",email);
-    localStorage.setItem("phoneNumber",phoneNumber);
+    myObj = {
+        name : name,
+        email : email,
+        phoneNumber : phoneNumber
+    }
+
+    localStorage.setItem(myObj.email,JSON.stringify(myObj));
+    console.log(localStorage);
 
 }
