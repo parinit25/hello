@@ -1,46 +1,40 @@
-
-
-function saveToLocalStorage(event)
-{
+function saveToLocalStorage(event) {
     event.preventDefault();
-    var name = event.target.name.value;
-    var email = event.target.email.value;
-    var phoneNumber = event.target.phonenumber.value;
-
-    myObj = {
-        name : name,
-        email : email,
-        phoneNumber : phoneNumber
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const phonenumber = event.target.phonenumber.value;
+    const obj = {
+        name,
+        email,
+        phonenumber
     }
-
-    localStorage.setItem(myObj.email,JSON.stringify(myObj));
-
-    displayUserDetails(myObj);
-    
-
+    localStorage.setItem(obj.email, JSON.stringify(obj))
+    showListofRegisteredUser(obj)
 }
 
-
-
-function displayUserDetails(user){
-
-    var childHTML=`<li> ${user.name} - ${user.email}</li>`;
-
-    var parentNode = document.getElementById('listOfUsers');
-    
-    parentNode.innerHTML = parentNode.innerHTML + childHTML;
-
-}
-
-window.addEventListener('DOMContentLoaded',(event)=>{
-    Object.keys(localStorage).forEach((key => {
-
+window.addEventListener('DOMContentLoaded', (event) => {
+    Object.keys(localStorage).forEach(key => {
         const user = JSON.parse(localStorage.getItem(key))
-        
+        showListofRegisteredUser(user)
+    })
+})
 
+function showListofRegisteredUser(user){
+    const parentNode = document.getElementById('listOfitems');
+    const createNewUserHtml = `<li ${user.email}'>${user.name} - ${user.email} - ${user.phonenumber}`;
+}
+//     console.log(createNewUserHtml)
+//     parentNode.innerHTML +=  createNewUserHtml;
+//     console.log(parentNode.innerHTML)
+// }
 
-        displayUserDetails(user);
+// function deleteUser(email) {
+//     localStorage.removeItem(email)
+//     removeItemFromScreen(email)
+// }
 
-    }))
-
-});
+// function removeItemFromScreen(email){
+//     const parentNode = document.getElementById('listOfitems');
+//     const elem = document.getElementById(email)
+//     parentNode.removeChild(elem);
+// }
